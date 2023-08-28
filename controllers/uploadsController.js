@@ -6,7 +6,7 @@ const fs = require("fs");
 const Product = require("../models/Product");
 
 const uploadProductImage = async (req, res) => {
-  const { name, Catagory, subCatagory, decription } = req.body;
+  const { name, Catagory, subCatagory, description, email } = req.body;
   const result = await cloudinary.uploader.upload(
     req.files.image.tempFilePath,
     {
@@ -17,12 +17,15 @@ const uploadProductImage = async (req, res) => {
   fs.unlinkSync(req.files.image.tempFilePath);
   const product = await Product.create({
     name,
+    email,
     Catagory,
     subCatagory,
-    decription,
+    description,
     image: result.secure_url,
   });
-  return res.status(StatusCodes.CREATED).json({ product });
+  return res
+    .status(StatusCodes.CREATED)
+    .json({ message: "created sucessfully." });
 };
 
 const getAllProduct = async (req, res) => {

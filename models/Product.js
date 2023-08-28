@@ -1,17 +1,25 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 
 const ProductSchema = new mongoose.Schema(
   {
+    email: {
+      type: String,
+      required: true,
+      validate: {
+        validator: validator.isEmail,
+        message: "Please provide valid email",
+      },
+    },
     name: {
       type: String,
       required: true,
       minlength: 3,
-      maxlength: 10,
     },
     Catagory: {
       type: String,
-      enum: ["blocKchain", "crypto", "stock"],
-      default: "blocKchain",
+      // enum: ["blocKchain", "crypto", "stock"],
+      // default: "blocKchain",
     },
     subCatagory: {
       type: String,
