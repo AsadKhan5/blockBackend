@@ -24,7 +24,7 @@ const userRoutes = require("./routes/auth");
 const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
 app.use(cookieParser("secret"));
-app.use(express.static("./public"));
+// app.use(express.static("./public"));
 
 app.use(express.json());
 app.use(fileUpload({ useTempFiles: true }));
