@@ -3,6 +3,7 @@ require("express-async-errors");
 const cookieParser = require("cookie-parser");
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 const fileUpload = require("express-fileupload");
 // USE V2
@@ -16,13 +17,18 @@ cloudinary.config({
 });
 // database
 const connectDB = require("./db/connect");
-
+var corsOptions = {
+  origin: true,
+  optionsSuccessStatus: 200,
+  methods: "GET, PUT",
+};
 // product router
 const productRouter = require("./routes/productRoutes");
 const userRoutes = require("./routes/auth");
 // error handler
 const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
+app.use(cors(corsOptions));
 app.use(cookieParser("secret"));
 // app.use(express.static("./public"));
 
