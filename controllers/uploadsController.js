@@ -6,7 +6,7 @@ const fs = require("fs");
 const Product = require("../models/Product");
 
 const uploadProductImage = async (req, res) => {
-  const { name, Catagory, subCatogory, decription } = req.body;
+  const { name, Catagory, subCatagory, decription } = req.body;
   const result = await cloudinary.uploader.upload(
     req.files.image.tempFilePath,
     {
@@ -18,7 +18,7 @@ const uploadProductImage = async (req, res) => {
   const product = await Product.create({
     name,
     Catagory,
-    subCatogory,
+    subCatagory,
     decription,
     image: result.secure_url,
   });
